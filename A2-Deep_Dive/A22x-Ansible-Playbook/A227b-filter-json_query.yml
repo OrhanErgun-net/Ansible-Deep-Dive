@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+
+  tasks:
+    
+  - name: save the Json data to a Variable as a Fact
+    set_fact:
+      file_d: "{{ lookup('file', 'local_facts.json') | from_json }}"
+
+  - name: "Print"
+    debug: 
+      msg: "{{ file_d | json_query('processor') }}"
+      # msg: "{{ file_d | json_query('devices.*.partitions') }}"
+ 

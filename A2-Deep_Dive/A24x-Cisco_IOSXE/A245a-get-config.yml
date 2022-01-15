@@ -1,0 +1,18 @@
+---
+- name: "Get Configs"
+  hosts: r3iosxe_api
+  connection: local
+  tasks:
+
+    - name: Connect via RestConf 
+    # https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/restconf_get_module.html
+      ansible.netcommon.restconf_get:
+        content: all
+        output: json
+        path: /Cisco-IOS-XE-native:native/
+      register: cli_result
+
+    - name: Create config file
+      copy:
+        content: "{{ cli_result['response'] | to_nice_json}}"
+        dest: "{{ cli_result | json_query('response.*.hostname') | first }}_config.json"

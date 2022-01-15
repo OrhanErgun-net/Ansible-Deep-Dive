@@ -1,0 +1,15 @@
+---
+- name: "Get Facts"
+  hosts: r3iosxe
+  connection: network_cli
+  tasks:
+    - name: Gather minimal facts
+      # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_facts_module.html#ansible-collections-cisco-ios-ios-facts-module
+      cisco.ios.ios_facts:  
+        gather_subset: min
+    
+      register: cli_result
+
+    - name: "Printing Facts"
+      debug:
+        msg: "{{ cli_result }}"

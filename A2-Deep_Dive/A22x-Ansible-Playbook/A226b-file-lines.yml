@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: "Print"
+      debug: 
+        msg: "{{ lookup('file', 'R1_config.txt').splitlines() }}"

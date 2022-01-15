@@ -1,0 +1,12 @@
+---
+- name: "Create User"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Creating Local User
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_user_module.html#ansible-collections-cisco-ios-ios-user-module
+      cisco.ios.ios_user:
+        name: ansible
+        configured_password: ansible
+        password_type: secret
+        privilege: 15

@@ -1,0 +1,18 @@
+---
+- name: "Ping"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Pinging 
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_ping_module.html#ansible-collections-cisco-ios-ios-ping-module
+      cisco.ios.ios_ping:
+        dest: 8.8.8.8
+        source: loopback3
+        count: 20
+        # df_bit: true
+        # size: 9000
+      register: cli_result
+
+    - name: "Printing output"
+      debug:
+        msg: "{{ cli_result }}"

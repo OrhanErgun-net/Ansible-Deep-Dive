@@ -1,0 +1,22 @@
+---
+- name: "Geting VLANs"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Geting VLANs
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_vlans_module.html#ansible-collections-cisco-ios-ios-vlans-module
+      cisco.ios.ios_vlans:
+        config:
+        state: gathered
+    
+      register: cli_result
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/set_fact_module.html
+    - name: "Setting Fact"
+      set_fact: 
+        cli_result : "{{ cli_result['gathered'] }}"
+
+    - name: "Printing looped output"
+      debug:
+        msg: "VLAN_Name: {{ item.name  }}   VLAN_ID: {{ item.vlan_id  }}"
+      loop: "{{ cli_result }}"

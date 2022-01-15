@@ -1,0 +1,13 @@
+---
+- hosts: local
+  vars:
+    IP_Addr: 
+      - FQDN: orhanergun.net
+      - Hostname: SW1
+      - IP: 192.168.1.3
+  tasks:
+    - name: Print IP only
+      debug:
+        msg: "This is an IP {{ item }}"
+      with_dict: "{{ IP_Addr }}"
+      when: item.value | ipv4 

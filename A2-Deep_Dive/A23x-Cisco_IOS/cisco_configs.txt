@@ -1,0 +1,2 @@
+snmp-server community cisco
+snmp-server location HQ

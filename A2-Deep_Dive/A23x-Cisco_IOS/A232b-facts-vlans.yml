@@ -1,0 +1,19 @@
+- name: "Geting Facts"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Gather excluded facts
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_facts_module.html#ansible-collections-cisco-ios-ios-facts-module
+      cisco.ios.ios_facts:
+        gather_subset: 
+          - '!all'
+          - '!min'
+        gather_network_resources: vlans
+    
+      register: cli_result
+
+    - name: "Printing Parsed Facts Values"
+      debug:
+        msg: 
+         - "{{ cli_result}}"
+        #  - "{{ cli_result['ansible_facts'] }}"

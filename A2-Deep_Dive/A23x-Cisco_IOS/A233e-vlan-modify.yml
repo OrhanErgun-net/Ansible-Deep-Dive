@@ -1,0 +1,22 @@
+---
+- name: "Configure VLANs"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Configuring VLANs
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_vlans_module.html#ansible-collections-cisco-ios-ios-vlans-module
+      cisco.ios.ios_vlans:
+        config:
+        - vlan_id: 100
+          name: V100-changed          
+        state: replaced
+    
+    - name: Sending privileged command
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_command_module.html#ansible-collections-cisco-ios-ios-command-module
+      cisco.ios.ios_command:
+        commands: show vlan brief
+      register: cli_result
+
+    - name: "Printing output"
+      debug:
+        msg: "{{ cli_result['stdout_lines'] }}"

@@ -1,0 +1,35 @@
+---
+- name: "Configure L3 Interface IP"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Configuring L3 Interface IP
+  # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_l3_interfaces_module.html#ansible-collections-cisco-ios-ios-l3-interfaces-module
+      cisco.ios.ios_l3_interfaces:
+        config:
+        - name: loopback4
+          ipv4:
+          - address: 172.16.15.4/24
+        state: merged          
+
+
+    - name: Gather L3 Interface IP
+  # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_l3_interfaces_module.html#ansible-collections-cisco-ios-ios-l3-interfaces-module
+      cisco.ios.ios_l3_interfaces:
+        config:
+        state: gathered         
+      register: cli_result
+
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/set_fact_module.html
+    - name: "Setting Fact"
+      set_fact: 
+        cli_result : "{{ cli_result['gathered'] }}"
+
+    - name: "Printing looped output"
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ cli_result }}"
+      when: "item.name.startswith('Loopback')"
+
+
+

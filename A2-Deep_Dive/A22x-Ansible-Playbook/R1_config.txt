@@ -1,0 +1,5 @@
+hostname R1_OE
+int gi 3
+ip add 172.16.16.3 255.255.255.255
+no shut
+ip route 0.0.0.0 0.0.0.0 172.16.16.1

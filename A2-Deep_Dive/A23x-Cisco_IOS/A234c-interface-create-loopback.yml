@@ -1,0 +1,22 @@
+---
+- name: "Configure Loopback Interfaces"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Configuring Loopback Interfaces
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_interfaces_module.html#ansible-collections-cisco-ios-ios-interfaces-module
+      cisco.ios.ios_interfaces:
+        config:
+        - name: Loopback4
+          description: Created by Ansible
+        state: merged
+
+    - name: Sending privileged command
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_command_module.html#ansible-collections-cisco-ios-ios-command-module
+      cisco.ios.ios_command:
+        commands: show interface description 
+      register: cli_result
+
+    - name: "Printing output"
+      debug:
+        msg: "{{ cli_result['stdout_lines'] }}"

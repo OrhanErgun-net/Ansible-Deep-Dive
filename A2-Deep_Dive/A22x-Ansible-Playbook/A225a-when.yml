@@ -1,0 +1,7 @@
+---
+- hosts: local
+  tasks:
+    - name: Print facts
+      debug:
+        msg: "This is RedHat {{ ansible_facts['distribution_version'] }}"
+      when: ansible_facts['os_family'] == "RedHat"

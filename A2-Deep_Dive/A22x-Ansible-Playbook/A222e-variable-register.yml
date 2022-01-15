@@ -1,0 +1,13 @@
+---
+- hosts: local
+
+  tasks:
+    - name : Ping
+      shell: "ping 8.8.8.8 -c 5"
+      register: output
+
+    - name: Print 
+      debug:
+        msg: "The IP is: {{ output }}"
+        # msg: "The IP is: {{ output.stdout}}"
+        # msg: "The IP is: {{ output.stdout.split('\n')}}"

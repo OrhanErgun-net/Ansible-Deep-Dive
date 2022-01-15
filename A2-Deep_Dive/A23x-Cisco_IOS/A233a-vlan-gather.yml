@@ -1,0 +1,16 @@
+---
+- name: "Geting VLANs"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Geting VLANs
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_vlans_module.html#ansible-collections-cisco-ios-ios-vlans-module
+      cisco.ios.ios_vlans:
+        config:
+        state: gathered    
+      register: cli_result
+
+    - name: "Printing output"
+      debug:
+        # msg: "{{ cli_result }}"
+        msg: "{{ cli_result['gathered'] }}"

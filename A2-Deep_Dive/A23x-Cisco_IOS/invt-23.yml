@@ -1,0 +1,25 @@
+---
+
+routers:
+  hosts:
+    r1vios:
+      ansible_host: 192.168.96.42 
+    r2vios:
+      ansible_host: 192.168.96.43
+
+switches:
+  hosts:
+    sw1viosl2:
+      ansible_host: 192.168.96.44 
+    sw2viosl2:
+      ansible_host: 192.168.96.45 
+
+all:
+  children:
+    routers:
+    switches:
+  vars:
+    ansible_network_os: ios
+    ansible_user: cisco
+    ansible_password: cisco
+

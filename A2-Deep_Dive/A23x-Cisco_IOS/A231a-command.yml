@@ -1,0 +1,14 @@
+- name: "Send Command"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Sending privileged command
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_command_module.html#ansible-collections-cisco-ios-ios-command-module
+      cisco.ios.ios_command:
+        commands: show version
+    
+      register: cli_result
+
+    - name: "Printing output"
+      debug:
+        msg: "{{ cli_result }}"

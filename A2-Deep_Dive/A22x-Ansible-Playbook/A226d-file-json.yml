@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Create facts file
+      copy:
+        content: "{{ ansible_facts }}"
+        dest: local_facts.json

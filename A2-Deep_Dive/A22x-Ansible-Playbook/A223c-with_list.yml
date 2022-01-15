@@ -1,0 +1,13 @@
+---
+- hosts: local
+  vars:
+    IP_Addr: 
+      - 192.168.1.1
+      - 192.168.1.2
+      - [192.168.1.3,192.168.1.4]
+
+  tasks:
+    - name: "Printing with loop"
+      debug:
+        msg: "{{ item }}"
+      with_list: "{{ IP_Addr | flatten(1)}}"

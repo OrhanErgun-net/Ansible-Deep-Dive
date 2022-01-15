@@ -1,0 +1,16 @@
+---
+- name: "Get Facts"
+  hosts: r3iosxe_api
+  connection: local
+  tasks:
+    - name: Connect via RestConf
+    # https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/restconf_get_module.html
+      ansible.netcommon.restconf_get:
+        content: all
+        output: json
+        path: /Cisco-IOS-XE-native:native/hostname/
+      register: cli_result
+
+    - name: Printing Result
+      debug: 
+        msg: "{{ cli_result }}"

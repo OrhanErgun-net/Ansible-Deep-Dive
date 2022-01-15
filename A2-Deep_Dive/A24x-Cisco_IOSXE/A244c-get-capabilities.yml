@@ -1,0 +1,31 @@
+---
+- name: "Get Capabilities"
+  hosts: r3iosxe_api
+  connection: local
+  tasks:
+
+    - name: Connect via RestConf getting hostname
+    # https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/restconf_get_module.html
+      ansible.netcommon.restconf_get:
+        content: all
+        output: json
+        path: /Cisco-IOS-XE-native:native/hostname/
+      register: hostname_result
+
+    - name: Setting HostName Fact
+      set_fact:
+        HostName: "{{ item.value }}"
+      with_dict: "{{ hostname_result['response'] }}"
+
+    - name: Connect via RestConf getting capabilities
+    # https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/restconf_get_module.html
+      ansible.netcommon.restconf_get:
+        content: all
+        output: json
+        path: /netconf-state/capabilities
+      register: capabilities_result
+
+    - name: Create capabilities file
+      copy:
+        content: "{{ capabilities_result['response'] | to_nice_json}}"
+        dest: "{{ HostName }}_capabilities.json"

@@ -1,0 +1,8 @@
+1. Make sure that you install and use redhat.vscode-yaml extension
+2. Open extension json setting file 
+3. Add the following configs and save
+
+{
+    "some.ext": "some.setting",
+    "yaml.customTags": ["!vault",]
+}

@@ -1,0 +1,16 @@
+- name: "Send Command"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: "Run command and parse with ntc_templates"
+    # https://docs.ansible.com/ansible/latest/network/user_guide/cli_parsing.html#parsing-with-ntc-templates
+      ansible.utils.cli_parse:
+        command: "show version"
+        parser:
+          name: ansible.netcommon.ntc_templates
+      register: cli_result
+
+    - name: "Printing output"
+      debug:
+        msg: "{{ cli_result }}"
+        # msg: "{{ cli_result['parsed'] }}"

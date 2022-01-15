@@ -1,0 +1,11 @@
+---
+- name: "Send Configuerations"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Sending Configuerations
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_config_module.html#ansible-collections-cisco-ios-ios-config-module
+      cisco.ios.ios_config:
+        lines:
+        - no cdp enable
+        parents: interface GigabitEthernet1/0

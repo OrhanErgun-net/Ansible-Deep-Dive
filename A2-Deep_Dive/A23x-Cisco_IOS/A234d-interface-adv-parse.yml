@@ -1,0 +1,26 @@
+---
+- name: "Gather All Interfaces"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Gathering All Interfaces
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_interfaces_module.html#ansible-collections-cisco-ios-ios-interfaces-module
+      cisco.ios.ios_interfaces:
+        config:
+        state: gathered
+      register: cli_result
+
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/set_fact_module.html
+    - name: "Setting Fact"
+      set_fact: 
+        cli_result : "{{ cli_result['gathered'] }}"
+
+    - name: "Printing looped output"
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ cli_result }}"
+      when: item.name == 'loopback4'
+      # when: "item.name.startswith('loopback')"
+
+
+

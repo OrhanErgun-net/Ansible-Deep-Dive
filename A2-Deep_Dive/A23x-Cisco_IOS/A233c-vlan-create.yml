@@ -1,0 +1,13 @@
+---
+- name: "Configure VLANs"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Configuring VLANs
+    # https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_vlans_module.html#ansible-collections-cisco-ios-ios-vlans-module
+      cisco.ios.ios_vlans:
+        config:
+        - name: VLAN_100
+          vlan_id: 100          
+        state: merged
+    

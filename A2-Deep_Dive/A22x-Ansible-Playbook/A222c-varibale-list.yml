@@ -1,0 +1,14 @@
+---
+- hosts: local
+  vars:
+    IP_Addr: 
+      - 192.168.1.1
+      - 192.168.1.2
+      - 192.168.1.3
+
+  tasks:
+    - name: Print 
+      debug:
+        msg: "The IP is: {{ IP_Addr }}"
+        # msg: "The IP is: {{ IP_Addr | type_debug}}"
+        # msg: "The IP is: {{ IP_Addr[0] }}"

@@ -1,0 +1,21 @@
+---
+- name: "Configure L2 Interfaces"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Configuring L2 Interfaces
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_l2_interfaces_module.html#ansible-collections-cisco-ios-ios-l2-interfaces-module
+      cisco.ios.ios_l2_interfaces:
+        config:
+        - name: GigabitEthernet0/2
+          mode: access
+          access:
+            vlan: 100
+          voice:
+            vlan: 101
+        - name: GigabitEthernet0/3
+          mode: trunk
+          trunk:
+            allowed_vlans: 30,100-101
+            encapsulation: dot1q
+        state: merged

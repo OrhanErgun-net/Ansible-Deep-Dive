@@ -1,0 +1,19 @@
+---
+- hosts: local
+  vars_prompt:
+
+    - name: UserName
+      prompt: What is your username?
+      private: no
+
+    - name: PassWord
+      prompt: Please enter a password?
+      encrypt: sha512_crypt
+      confirm: yes
+
+  tasks:
+    - name: Print 
+      debug:
+        msg: 
+          - "Username is: {{ UserName }}"
+          - "Password is: {{ PassWord }}"

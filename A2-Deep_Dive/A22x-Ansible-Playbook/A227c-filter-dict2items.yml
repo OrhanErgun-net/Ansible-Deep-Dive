@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  vars:
+  - Dict: 
+      R1: 192.168.1.1
+      R2: 192.168.1.2
+      SW1: 192.168.1.3
+
+  tasks:
+    - name: "Print"
+      debug: 
+        msg: "{{ Dict | dict2items}}"

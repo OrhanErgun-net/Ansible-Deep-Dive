@@ -1,0 +1,44 @@
+---
+
+eve_ng:
+  hosts:
+    r3iosxe:
+      ansible_host: 192.168.96.46
+      ansible_user: cisco
+      ansible_password: cisco
+      ansible_network_os: ios
+
+    r3iosxe_api:
+      ansible_host: 192.168.96.46
+      ansible_user: cisco
+      ansible_password: cisco
+      ansible_connection: httpapi
+      ansible_network_os: restconf
+      ansible_httpapi_use_ssl: true
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 443
+      ansible_httpapi_restconf_root: "/restconf/data"
+      
+sandbox:
+  hosts:
+    r4iosxe:
+      ansible_host: sandbox-iosxe-latest-1.cisco.com
+      ansible_user: developer
+      ansible_password: C1sco12345
+      ansible_network_os: ios
+
+    r4iosxe_api:
+      ansible_host: sandbox-iosxe-latest-1.cisco.com
+      ansible_user: developer
+      ansible_password: C1sco12345
+      ansible_connection: httpapi
+      ansible_network_os: restconf
+      ansible_httpapi_use_ssl: true
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 443
+      ansible_httpapi_restconf_root: "/restconf/data"
+
+all:
+  children:
+    eve_ng:
+    sandbox:

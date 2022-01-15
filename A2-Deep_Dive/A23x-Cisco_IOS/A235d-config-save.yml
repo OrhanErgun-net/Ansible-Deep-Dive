@@ -1,0 +1,20 @@
+---
+- name: "Send Configuerations"
+  hosts: sw1viosl2
+  connection: network_cli
+  tasks:
+    - name: Sending Configuerations
+# https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_config_module.html#ansible-collections-cisco-ios-ios-config-module
+      cisco.ios.ios_config:
+        lines:
+        - description Shutdown_By_Ansible
+        - shutdown
+        parents: '{{ item }}'
+      with_items:
+      - interface GigabitEthernet1/1
+      - interface GigabitEthernet1/2
+      - interface GigabitEthernet1/3
+
+    - name: Save running Configuerations
+      cisco.ios.ios_config:
+        save_when: modified

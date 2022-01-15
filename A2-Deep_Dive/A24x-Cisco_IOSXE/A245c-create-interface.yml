@@ -1,0 +1,16 @@
+---
+- name: "Create Interface"
+  hosts: r3iosxe_api
+  connection: local
+  tasks:
+
+    - name: Connect via RestConf 
+# https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/restconf_config_module.html#ansible-collections-ansible-netcommon-restconf-config-module
+      ansible.netcommon.restconf_config:
+        path: /Cisco-IOS-XE-native:native/interface/
+        content: "{{ lookup('file','LoopBack_Config.json') | string }}"
+      register: cli_result
+
+    - name: Printing Result
+      debug: 
+        msg: "{{ cli_result }}"
