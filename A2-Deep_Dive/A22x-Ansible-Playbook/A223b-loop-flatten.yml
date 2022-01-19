@@ -10,5 +10,4 @@
     - name: "Printing with loop"
       debug:
         msg: "{{ item }}"
-      loop: "{{ IP_Addr }}"  
-      # loop: "{{ IP_Addr | flatten(1)}}"
+      loop: "{{ IP_Addr | flatten(1)}}"
