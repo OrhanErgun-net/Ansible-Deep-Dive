@@ -1,5 +1,5 @@
 ---
-- name: "Create Interface"
+- name: "Delete Interface"
   hosts: r3iosxe_api
   connection: local
   tasks:
