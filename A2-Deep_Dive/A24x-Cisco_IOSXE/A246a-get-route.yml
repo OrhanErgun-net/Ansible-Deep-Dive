@@ -1,5 +1,5 @@
 ---
-- name: "Get Configs"
+- name: "Get Routes"
   hosts: r3iosxe_api
   connection: local
   tasks:
