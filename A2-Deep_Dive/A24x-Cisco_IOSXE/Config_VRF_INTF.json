@@ -1,0 +1,20 @@
+{
+    "routing-instance": [
+        {
+            "interfaces": {
+                "interface": [
+                    "GigabitEthernet3"
+                ]
+            },
+            "name": "OE_NET",
+            "routing-protocols": {
+                "routing-protocol": [
+                    {
+                        "name": "1",
+                        "type": "ietf-routing:static"
+                    }
+                ]
+            }
+        }
+    ]
+}

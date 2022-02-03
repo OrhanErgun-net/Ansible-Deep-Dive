@@ -1,0 +1,22 @@
+{
+    "ietf-routing:routing": {
+        "routing-instance": [
+            {
+                "interfaces": {
+                    "interface": [
+                        "GigabitEthernet4"
+                    ]
+                },
+                "name": "OE_NET",
+                "routing-protocols": {
+                    "routing-protocol": [
+                        {
+                            "name": "1",
+                            "type": "ietf-routing:static"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

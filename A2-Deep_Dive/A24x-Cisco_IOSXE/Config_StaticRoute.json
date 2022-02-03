@@ -1,0 +1,36 @@
+{
+    "ietf-routing:routing": {
+        "routing-instance": [
+            {
+                "description": "default-vrf [read-only]",
+                "name": "default",
+                "routing-protocols": {
+                    "routing-protocol": [
+                        {
+                            "name": "1",
+                            "static-routes": {
+                                "ietf-ipv4-unicast-routing:ipv4": {
+                                    "route": [
+                                        {
+                                            "destination-prefix": "0.0.0.0/0",
+                                            "next-hop": {
+                                                "next-hop-address": "192.168.96.2"
+                                            }
+                                        },
+                                        {
+                                            "destination-prefix": "8.8.8.8/32",
+                                            "next-hop": {
+                                                "next-hop-address": "192.168.96.2"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "type": "ietf-routing:static"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
