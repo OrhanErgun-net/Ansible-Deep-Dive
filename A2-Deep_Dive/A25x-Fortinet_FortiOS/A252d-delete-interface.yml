@@ -1,0 +1,24 @@
+---
+- name: "Delete Interface"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+  tasks:
+    - name: Deleting Interface
+    # https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_system_interface.html
+      fortios_system_interface:
+        vdom:  "{{ vdom }}"
+        state: "absent"
+        system_interface:
+          vdom: "{{ vdom }}"
+          name: "LoopBack4"
+
+      register: cli_result
+
+    - name: "Printing Facts"
+      debug:
+        msg: "{{ cli_result }}"
+

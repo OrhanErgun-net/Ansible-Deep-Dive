@@ -1,0 +1,23 @@
+---
+- name: "Get Interface"
+  hosts: fw1_fgt7
+  connection: httpapi
+  vars:
+    vdom: "root"
+  tasks:
+    - name: Getting Interfaces Configuration
+    # https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/fortios_configuration_fact.html
+      fortinet.fortios.fortios_configuration_fact:
+        access_token: "{{ fortios_access_token }}"
+        selector: 'system_interface'
+
+      register: cli_result
+
+    - name: "Printing Facts"
+      debug:
+        msg: "{{ cli_result }}"
+
+    - name: Create output file
+      copy:
+        content: "{{ cli_result | to_nice_json }}"
+        dest: Interfaces.json

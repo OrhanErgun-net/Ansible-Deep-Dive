@@ -1,0 +1,27 @@
+---
+- name: "Change Interface"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Changing Interface Configuration
+  # https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_system_interface.html
+    fortios_system_interface:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_interface:
+        name: "port4"
+        description: "DC-SW"
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result }}"
+      # msg: "{{ cli_result | json_query('meta.results')}}"
+

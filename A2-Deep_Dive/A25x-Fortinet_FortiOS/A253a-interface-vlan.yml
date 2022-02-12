@@ -1,0 +1,33 @@
+---
+- name: "Create and Assign VLAN"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Creating and Assigning VLAN
+# https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_system_interface.html
+    fortios_system_interface:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_interface:
+        name: "P4.100"
+        type: "vlan"
+        interface: "port4"
+        description: "VLAN-100"
+        vlanid: "100"
+        vdom: "{{ vdom }}"
+        ip: "172.16.16.100 255.255.255.0"
+        allowaccess: "ping"
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result }}"
+      # msg: "{{ cli_result | json_query('meta.results')}}"
+

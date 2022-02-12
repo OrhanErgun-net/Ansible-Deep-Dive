@@ -1,0 +1,26 @@
+---
+- name: "Get Objects"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+    Q_2: "meta.results[?type == 'ipmask' ].[name,subnet]"
+
+  tasks:
+  - name: Getting IP addresses objects with Filter
+# https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/fortios_configuration_fact.html
+    fortios_configuration_fact:
+        
+        selector: 'firewall_address'
+        filters: 
+          # - name==8.8.8.8
+          - name=@172.16.24.7
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result | json_query(Q_2)}}"

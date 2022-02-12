@@ -1,0 +1,29 @@
+---
+- name: "Create and Assign Interface"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Creating and Assigning Interface
+# https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_system_interface.html
+    fortios_system_interface:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_interface:
+        name: "port3"
+        interface: "port3"
+        description: "DHCP Server"
+        vdom: "{{ vdom }}"
+        ip: "172.16.24.1 255.255.255.0"
+        allowaccess: "ping"
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result }}"

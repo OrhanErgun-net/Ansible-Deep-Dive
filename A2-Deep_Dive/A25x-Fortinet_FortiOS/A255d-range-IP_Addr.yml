@@ -1,0 +1,29 @@
+---
+- name: "Create IP Address Range"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Creating IP Address Range
+# https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_firewall_address.html
+    fortios_firewall_address:
+        vdom: "{{ vdom }}"
+        state: "present"
+        firewall_address:
+
+          name: "IP_OE_{{ item }}_172.16.24.7{{ item }}/32"
+          type: "ipmask"
+          subnet: "172.16.24.7{{ item }} 255.255.255.255"
+          comment: "Created By Ansible"
+          
+    with_sequence: start=1 end=4
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result | json_query('meta.results')}}"

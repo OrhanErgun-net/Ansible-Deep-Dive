@@ -1,0 +1,35 @@
+---
+- name: "Enable DHCP"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Enabling DHCP
+# https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_system_dhcp_server.html
+    fortios_system_dhcp_server:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_dhcp_server:
+        id:  "20"
+        interface: "port3"
+        ip_range:
+         -
+            end_ip: "172.16.24.100"
+            id:  "4"
+            start_ip: "172.16.24.100"
+        netmask: "255.255.255.0"
+        default_gateway: "172.16.24.1"
+        dns_server1: "8.8.8.8"
+        dns_server2: "1.1.1.1"
+        status: "enable"
+
+    register: cli_result
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result }}"
+      # msg: "{{ cli_result | json_query('meta.results')}}"

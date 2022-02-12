@@ -1,0 +1,23 @@
+---
+- name: "Get VLAN"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Getting Zones
+  # https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/fortios_configuration_fact.html
+    fortios_configuration_fact:
+
+        selector: system_zone
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result }}"
+      # msg: "{{ cli_result | json_query('meta.results')}}"

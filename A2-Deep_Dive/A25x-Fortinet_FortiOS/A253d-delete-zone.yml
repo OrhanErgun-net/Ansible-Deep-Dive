@@ -1,0 +1,25 @@
+---
+- name: "Create and Deassig Zone"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+
+  tasks:
+  - name: Creating and Deassigning Zone
+  # https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_system_global.html
+    fortios_system_zone:
+      vdom:  "{{ vdom }}"
+      state: "absent"
+      system_zone:
+        name: "DMZ"
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result }}"

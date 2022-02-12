@@ -1,0 +1,22 @@
+---
+- name: "Monitor DHCP"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Monitoring DHCP
+# https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/fortios_monitor_fact.html
+    fortios_monitor_fact:
+        
+        selector: 'system_dhcp'
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result | json_query('meta.results')}}"

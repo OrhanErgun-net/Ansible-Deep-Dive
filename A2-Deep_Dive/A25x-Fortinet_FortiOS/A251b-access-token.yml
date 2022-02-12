@@ -1,0 +1,20 @@
+---
+- name: "Get Global Settings"
+  hosts: fw1_fgt7
+  connection: httpapi
+  vars:
+    vdom: "root"
+  tasks:
+    - name: Getting Global Settings with access token
+      # https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/fortios_configuration_fact.html
+      fortinet.fortios.fortios_configuration_fact:
+        access_token: "{{ fortios_access_token }}"
+        selector: 'system_global'
+
+      register: cli_result
+
+    - name: "Printing Facts"
+      debug:
+        msg: "{{ cli_result }}"
+        # msg="{{ results | json_query('meta.results')}}"
+        # msg="{{ results | json_query('meta.results.hostname')}}"

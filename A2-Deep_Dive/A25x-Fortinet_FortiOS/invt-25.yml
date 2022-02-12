@@ -1,0 +1,30 @@
+---
+
+fortigate:
+  hosts:
+    fw1_fgt7:
+      ansible_host: 192.168.96.47
+      ansible_user: admin
+      ansible_password: Fo12@345
+      ansible_connection: httpapi
+      ansible_network_os: fortinet.fortios.fortios
+      fortios_access_token: N17j6k3d9ms6qkGpdq1G5k9zxp6gm5
+
+
+    fw1_fgt7_api:
+      ansible_host: 192.168.96.47
+      # ansible_user: admin_api
+      # ansible_password: Fo12@345
+      ansible_connection: httpapi
+      ansible_network_os: restconf
+      fortios_access_token: N17j6k3d9ms6qkGpdq1G5k9zxp6gm5
+      token: "?access_token=N17j6k3d9ms6qkGpdq1G5k9zxp6gm5"
+      ansible_httpapi_use_ssl: false
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 80
+      ansible_httpapi_restconf_root: ""
+      
+
+all:
+  children:
+    fortigate:
