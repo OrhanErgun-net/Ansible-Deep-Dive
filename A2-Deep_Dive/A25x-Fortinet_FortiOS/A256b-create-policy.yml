@@ -1,0 +1,40 @@
+---
+- name: "Create Policy"
+  hosts: fw1_fgt7
+  collections:
+  - fortinet.fortios
+  connection: httpapi
+  vars:
+    vdom: "root"
+
+  tasks:
+  - name: Creating Policy
+# https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/gen/fortios_firewall_policy.html
+    fortios_firewall_policy:
+        vdom: "{{ vdom }}"
+        state: "present"
+        firewall_policy:
+
+          name: "Policy created by Ansible"
+          policyid: 123
+          action: "accept"
+          srcintf:
+            - name: "port2"
+          srcaddr:
+            - name: "all"
+          dstintf:
+            - name: "port4"
+          dstaddr:
+            - name: "all"
+          service: 
+            - name: "ALL"
+          schedule: "always"  
+          logtraffic: "all"  
+          status: "disable"
+
+    register: cli_result
+
+
+  - name: "Printing Facts"
+    debug:
+      msg: "{{ cli_result | json_query('meta.results')}}"

@@ -1,0 +1,19 @@
+---
+- name: "Getting Facts"
+  hosts: fw1_fgt7_api
+  connection: local
+  vars:
+    vdom: "root"
+
+  tasks:
+    - name: Connect via RestConf
+    # https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/restconf_get_module.html
+      ansible.netcommon.restconf_get:
+        output: json
+        path: "/api/v2/cmdb/firewall/address{{ token }}"
+      register: cli_result
+
+    - name: Printing Result
+      debug: 
+        msg: 
+         - "{{ cli_result.response.results }}"
