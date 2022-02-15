@@ -7,7 +7,7 @@
   vars:
     vdom: "root"
     Q_1: "meta.results[?type == 'ipmask' ]"
-    Q_2: "meta.results[?type == 'ipmask' ].[name,ip]"
+    Q_2: "meta.results[?type == 'ipmask' ].[name,subnet]"
 
   tasks:
   - name: Getting IP addresses objects Parsed
