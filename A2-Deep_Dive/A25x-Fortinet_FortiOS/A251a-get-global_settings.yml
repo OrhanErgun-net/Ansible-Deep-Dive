@@ -16,5 +16,5 @@
     - name: "Printing Facts"
       debug:
         msg: "{{ cli_result }}"
-        # msg="{{ results | json_query('meta.results')}}"
-        # msg="{{ results | json_query('meta.results.hostname')}}"
+        # msg="{{ cli_result | json_query('meta.results')}}"
+        # msg="{{ cli_result | json_query('meta.results.hostname')}}"
