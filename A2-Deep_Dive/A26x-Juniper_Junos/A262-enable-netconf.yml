@@ -1,0 +1,14 @@
+- name: "Enabling Netconf"
+  hosts: r4vmx
+  tasks:
+    - name: Enable Netconf
+# https://docs.ansible.com/ansible/2.9/modules/junos_netconf_module.html#junos-netconf-module
+      junos_netconf:
+        listens_on: 830
+        state: present
+    
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result }}"

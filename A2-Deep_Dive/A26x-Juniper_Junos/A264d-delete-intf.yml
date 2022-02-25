@@ -1,0 +1,16 @@
+- name: "Deleting Interfaces"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Delete Interfaces
+# https://docs.ansible.com/ansible/2.9/modules/junos_l3_interface_module.html#junos-l3-interface-module
+      junos_l3_interface:
+        name: lo0
+        ipv4: 172.16.16.1
+        state: absent
+
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result }}"
+

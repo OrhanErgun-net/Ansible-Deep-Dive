@@ -1,0 +1,18 @@
+- name: "Getting Interface Information"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Get Interface Information
+# https://docs.ansible.com/ansible/2.9/modules/junos_rpc_module.html#junos-rpc-module
+      junos_rpc:
+        rpc: get-interface-information
+        output: json
+        args:
+          interface-name: fxp0
+          media: True
+
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result['output'] }}"
+

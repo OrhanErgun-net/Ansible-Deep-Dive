@@ -1,0 +1,16 @@
+- name: "Updating Interfaces"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Update Interfaces
+# https://docs.ansible.com/ansible/2.9/modules/junos_interfaces_module.html#junos-interfaces-module
+      junos_interfaces:
+        config:
+          - name: lo0
+            description: "Configured by Ansible"
+
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result }}"
+

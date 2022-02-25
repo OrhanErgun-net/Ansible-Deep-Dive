@@ -1,0 +1,14 @@
+- name: "Getting System Information"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Get System Information
+# https://docs.ansible.com/ansible/2.9/modules/junos_rpc_module.html#junos-rpc-module
+      junos_rpc:
+        rpc: get-system-information
+
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result['xml'] }}"
+

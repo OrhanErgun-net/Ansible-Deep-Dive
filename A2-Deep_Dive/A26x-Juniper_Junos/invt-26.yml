@@ -1,0 +1,23 @@
+---
+# pip3 install ncclient jxmlease
+# https://docs.ansible.com/ansible/2.9/network/user_guide/platform_junos.html
+junos:
+  hosts:
+    r4vmx:
+      ansible_host: 192.168.96.48
+      ansible_user: ansible
+      ansible_password: Jun@22$bai8
+      ansible_network_os: junos
+      ansible_connection: network_cli
+
+    r4vmx_netconf:
+      ansible_host: 192.168.96.48
+      ansible_user: ansible
+      ansible_password: Jun@22$bai8
+      ansible_network_os: junos
+      ansible_connection: netconf
+
+
+all:
+  children:
+    junos:

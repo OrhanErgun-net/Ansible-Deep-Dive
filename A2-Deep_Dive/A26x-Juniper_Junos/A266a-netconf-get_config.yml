@@ -1,0 +1,17 @@
+- name: "Getting Configuration"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Get Configuration
+# https://docs.ansible.com/ansible/2.9/modules/netconf_get_module.html#netconf-get-module
+      netconf_get:
+
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result['stdout'] }}"
+
+    - name: Create config output file
+      copy:
+        content: "{{ cli_result['stdout']  }}"
+        dest: "Netconf_config_output.xml"

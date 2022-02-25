@@ -1,0 +1,19 @@
+- name: "Sending Command"
+  hosts: r4vmx
+  tasks:
+    - name: Send Command 
+# https://docs.ansible.com/ansible/2.9/modules/junos_command_module.html#junos-command-module
+      junos_command:  
+        commands:
+          - "show configuration | match host-name"
+    
+      register: cli_result
+
+    - name: "Setting Fact"
+      set_fact: 
+        parsed_result : "{{ cli_result['stdout_lines'][0][0].split()[1][:-1]  }}"
+
+    - name: "Printing Parsed Result"
+      debug:
+        msg: "{{ parsed_result  }}"
+

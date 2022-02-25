@@ -1,0 +1,14 @@
+- name: "Getting Configuration"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Get Configuration parsing hostname
+# https://docs.ansible.com/ansible/2.9/modules/netconf_get_module.html#netconf-get-module
+      netconf_get:
+        filter: <configuration><system><host-name></host-name></system></configuration>
+
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result['stdout'] }}"
+

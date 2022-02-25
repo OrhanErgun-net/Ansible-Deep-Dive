@@ -1,0 +1,13 @@
+- name: "Getting Interfaces"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Get Interfaces
+# https://docs.ansible.com/ansible/2.9/modules/junos_facts_module.html#junos-facts-module
+      junos_facts:
+        gather_network_resources:
+          - l3_interfaces
+      register: cli_result
+
+    - name: "Printing Facts"
+      debug:
+        msg: "{{ ansible_network_resources }}"

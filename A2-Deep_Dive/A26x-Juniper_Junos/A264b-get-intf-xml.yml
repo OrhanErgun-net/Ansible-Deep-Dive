@@ -1,0 +1,20 @@
+- name: "Getting Interfaces"
+  hosts: r4vmx
+  tasks:
+    - name: Get Interfaces
+# https://docs.ansible.com/ansible/2.9/modules/junos_command_module.html#junos-command-module
+      junos_command:  
+        commands:
+          - show configuration interfaces
+        display: xml
+    
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result['stdout'] }}"
+
+    - name: Create Interfaces config output file
+      copy:
+        content: "{{ cli_result['stdout'][0] }}"
+        dest: "INTF_config_output.xml"

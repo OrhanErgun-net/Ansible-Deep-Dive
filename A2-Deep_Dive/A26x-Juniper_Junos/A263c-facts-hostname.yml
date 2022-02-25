@@ -1,0 +1,13 @@
+- name: "Getting Facts"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Gather facts
+# https://docs.ansible.com/ansible/2.9/modules/junos_facts_module.html#junos-facts-module
+      junos_facts:  
+    
+      register: cli_result
+
+    - name: "Printing Facts"
+      debug:
+        msg: "{{ cli_result['ansible_facts']['ansible_net_hostname'] }}"
+        # msg: "{{ ansible_net_hostname }}"

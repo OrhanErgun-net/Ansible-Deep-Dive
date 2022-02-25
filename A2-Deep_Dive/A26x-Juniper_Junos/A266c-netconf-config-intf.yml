@@ -1,0 +1,35 @@
+- name: "Sending Configuration"
+  hosts: r4vmx_netconf
+  tasks:
+    - name: Send Configuration
+# https://docs.ansible.com/ansible/2.9/modules/netconf_config_module.html#netconf-config-module
+      netconf_config:
+        content: |
+          <config>
+            <configuration>
+              <interfaces>
+                  <interface>
+                      <name>ge-0/0/1</name>
+                      <description>Configured by Ansible</description>
+                      <unit>
+                          <name>0</name>
+                          <family>
+                              <inet>
+                                  <address>
+                                      <name>10.10.1.1/24</name>
+                                  </address>
+                              </inet>
+                          </family>
+                      </unit>
+                  </interface>
+              </interfaces>
+            </configuration>
+          </config>
+
+
+      register: cli_result
+
+    - name: "Printing Result"
+      debug:
+        msg: "{{ cli_result }}"
+
