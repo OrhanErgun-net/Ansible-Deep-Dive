@@ -1,4 +1,8 @@
 # Ansible-Deep-Dive
+This is the repository for the Automating Cisco, Juniper and Fortinet Networks with Ansible Course.
+
+## Course
+Ansible Deep_Dive Muti-Vendor for Network Engineers - [OrhanErgun](https://orhanergun.net/courses/automating-cisco-juniper-fortinet-networks-with-ansible/)
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
