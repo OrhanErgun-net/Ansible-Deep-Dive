@@ -48,5 +48,5 @@ The following topics are convered in *Ansible Basics 'Fundamentals' Course* and 
    ```
 2. Download the course repo locally
    ```sh
-   git clone https://github.com/OrhanErgun-net/Ansible-Advanced-MultiVendor-Networks.git 
+   git clone https://github.com/OrhanErgun-net/Ansible-Deep-Dive.git
    ```
